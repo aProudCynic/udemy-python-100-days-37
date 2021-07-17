@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 import requests
 
@@ -41,5 +42,22 @@ def create_graph():
         print("Graph creation failed")
 
 
+def post_value_to_graph(date=datetime.today(), quantity=1):
+    formatted_date = date.strftime("%Y%m%d")
+    data = {
+        "date": formatted_date,
+        "quantity": str(quantity),
+    }
+    headers = {
+        "X-USER-TOKEN": API_TOKEN,
+    }
+    response = requests.post(GRAPH_URL, data=json.dumps(data), headers=headers)
+    if response.status_code == 200:
+        print(f"Graph updated, pleas check at {GRAPH_URL}")
+    else:
+        print("Graph update failed")
+
+
 # create_user()
-create_graph()
+# create_graph()
+post_value_to_graph()

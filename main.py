@@ -16,6 +16,6 @@ def create_user():
         "agreeTermsOfService": "yes",
         "notMinor": "yes",
     }
-    url = f"{URL_BASE}/users"
+    url = f"{URL_BASE}"
     response = requests.post(url, data=json.dumps(data))
 

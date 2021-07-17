@@ -1,2 +1,2 @@
 USERNAME = "aproudcynic"
-URL_BASE = "https://pixe.la/v1"
+URL_BASE = "https://pixe.la/v1/users"

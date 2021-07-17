@@ -8,6 +8,7 @@ from constants import (
     URL_BASE,
     GRAPH_ID,
     GRAPH_URL,
+    TOKEN_API_HEADER,
 )
 from secrets import API_TOKEN
 
@@ -32,9 +33,7 @@ def create_graph():
         "color": "shibafu",
     }
     url = f"{URL_BASE}/{USERNAME}/graphs"
-    headers = {
-        "X-USER-TOKEN": API_TOKEN,
-    }
+    headers = TOKEN_API_HEADER
     response = requests.post(url, data=json.dumps(data), headers=headers)
     if response.status_code == 200:
         print(f"Graph created, pleas check at {GRAPH_URL}")
@@ -48,14 +47,16 @@ def post_value_to_graph(date=datetime.today(), quantity=1):
         "date": formatted_date,
         "quantity": str(quantity),
     }
-    headers = {
-        "X-USER-TOKEN": API_TOKEN,
-    }
+    headers = TOKEN_API_HEADER
     response = requests.post(GRAPH_URL, data=json.dumps(data), headers=headers)
     if response.status_code == 200:
         print(f"Graph updated, pleas check at {GRAPH_URL}")
     else:
         print("Graph update failed")
+
+
+def apply_pixela_format_to(date):
+    return date.strftime("%Y%m%d")
 
 
 # create_user()
